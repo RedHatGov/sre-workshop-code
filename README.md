@@ -24,7 +24,7 @@ Set the number of users:
 export NUM_USERS=5  # replace me
 ```
 
-For each user, create a user project and service mesh control plane project.  Add the user project as a member to each user's control plane project.
+For each user, create a user project and service mesh control plane project:
 
 ```bash
 for (( i=1 ; i<=$NUM_USERS ; i++ ))
@@ -34,7 +34,6 @@ do
   oc new-project user$i-istio --as=user$i \
     --as-group=system:authenticated --as-group=system:authenticated:oauth
   oc create -n user$i-istio -f ./setup/istio-installation.yaml
-  sed "s|%USER_PROJECT%|user$i|" ./setup/istio-smmr.yaml | oc create -n user$i-istio -f
 done
 ```
 
@@ -44,11 +43,12 @@ Wait until the control plane is running:
 oc get pods -n user$NUM_USERS-istio -- watch
 ```
 
-For each user, deploy the microservices application:
+For each user, add the user project as a member to each user's service mesh project and deploy the microservices application.
 
 ```bash
 for (( i=1 ; i<=$NUM_USERS ; i++ ))
 do
+  sed "s|%USER_PROJECT%|user$i|" ./setup/istio-smmr.yaml | oc create -n user$i-istio -f
   oc new-app -n user$i -f ./setup/microservices-app-ui.yaml -e FAKE_USER=true
   oc new-app -n user$i -f ./setup/microservices-boards.yaml
 done
