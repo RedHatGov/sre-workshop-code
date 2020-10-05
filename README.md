@@ -57,5 +57,6 @@ do
   sed "s|%USER_PROJECT%|user$i|" ./setup/istio-smmr.yaml | oc create -n user$i-istio -f -
   oc new-app -n user$i -f ./setup/microservices-app-ui.yaml -e FAKE_USER=true
   oc new-app -n user$i -f ./setup/microservices-boards.yaml
+  oc create -n user$i -f ./setup/gateway.yaml
 done
 ```
