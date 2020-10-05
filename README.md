@@ -5,7 +5,7 @@ For reference the workshop dashboard using this code [can be found here](https:/
 
 ## Setup
 
-Run the following as a cluster admin.
+Run the following as cluster admin.
 
 Install the service mesh operators:
 
@@ -44,13 +44,12 @@ Wait until the control plane is running:
 oc get pods -n user$NUM_USERS-istio -- watch
 ```
 
-For each user, deploy the microservices application.
+For each user, deploy the microservices application:
 
 ```bash
 for (( i=1 ; i<=$NUM_USERS ; i++ ))
 do
-  oc new-app -n user$i -f ./setup/microservices-app-ui.yaml
+  oc new-app -n user$i -f ./setup/microservices-app-ui.yaml -e FAKE_USER=true
   oc new-app -n user$i -f ./setup/microservices-boards.yaml
 done
 ```
-
