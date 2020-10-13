@@ -60,3 +60,5 @@ do
   oc create -n user$i -f ./setup/gateway.yaml
 done
 ```
+
+*Note*: The `app-ui` image in Quay was built using [this fork](https://github.com/theckang/service-mesh-workshop-code).  The `boards` image in Quay was built using the [upstream repo](https://github.com/RedHatGov/service-mesh-workshop-code).
