@@ -1,0 +1,19 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  name: app-ui
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+      - name: app-ui
+        livenessProbe:
+          httpGet:
+            path: /info
+            port: 8080
+        readinessProbe:
+          httpGet:
+            path: /info
+            port: 8080
+  
