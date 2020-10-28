@@ -1,0 +1,26 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: "high-cpu-workload"
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          concurrencyPolicy: Forbid
+          successfulJobsHistoryLimit: 1
+          failedJobsHistoryLimit: 1
+          containers:
+          - name: stress
+            image: vish/stress
+            args:
+            - -cpus
+            - "4"
+            resources:
+              limits:
+                cpu: 4
+              requests:
+                cpu: 2
+          restartPolicy: Never
