@@ -58,6 +58,7 @@ do
   oc new-app -n user$i -f ./setup/microservices-app-ui.yaml -e FAKE_USER=true
   oc new-app -n user$i -f ./setup/microservices-boards.yaml
   oc create -n user$i -f ./setup/gateway.yaml
+  oc create -n user$i -f ./setup/quota.yaml
 done
 ```
 
