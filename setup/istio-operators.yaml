@@ -8,8 +8,6 @@ spec:
   name: elasticsearch-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  installPlanApproval: Manual
-  startingCSV: elasticsearch-operator.4.5.0-202009182238.p0
 
 ---
 
@@ -23,8 +21,6 @@ spec:
   name: jaeger-product
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  installPlanApproval: Manual
-  startingCSV: jaeger-operator.v1.17.6
 
 ---
 
@@ -38,8 +34,6 @@ spec:
   name: kiali-ossm
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  installPlanApproval: Manual
-  startingCSV: kiali-operator.v1.12.15
 
 ---
 
@@ -53,5 +47,3 @@ spec:
   name: servicemeshoperator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  installPlanApproval: Manual
-  startingCSV: servicemeshoperator.v1.1.9
