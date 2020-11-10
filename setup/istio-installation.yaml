@@ -5,6 +5,8 @@ metadata:
 spec:
   tracing:
     type: None
+  telemetry:
+    type: Mixer
   addons:
     grafana:
       enabled: true

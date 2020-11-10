@@ -33,6 +33,24 @@ do
     --as-group=system:authenticated --as-group=system:authenticated:oauth
   oc new-project user$i-istio --as=user$i \
     --as-group=system:authenticated --as-group=system:authenticated:oauth
+done
+```
+
+Delete limit ranges in each user project:
+> Note: This is only for RHPDS clusters
+
+```bash
+for (( i=1 ; i<=$NUM_USERS ; i++ ))
+do
+  oc delete limitrange --all -n user$i-istio
+done
+```
+
+Create service mesh control plane in each project:
+
+```bash
+for (( i=1 ; i<=$NUM_USERS ; i++ ))
+do
   oc create -n user$i-istio -f ./setup/istio-installation.yaml
 done
 ```
