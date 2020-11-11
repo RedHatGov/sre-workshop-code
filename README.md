@@ -70,6 +70,33 @@ do
   oc new-app -n user$i -f ./setup/microservices-app-ui.yaml -e FAKE_USER=true
   oc new-app -n user$i -f ./setup/microservices-boards.yaml
   oc create -n user$i -f ./setup/gateway.yaml
+done
+```
+
+Wait until the application pods are running:
+
+```bash
+oc get pods -n user$NUM_USERS --watch
+```
+
+> Output (sample):
+
+```
+NAME                      READY   STATUS      RESTARTS   AGE
+app-ui-1-deploy           0/1     Completed   0          22h
+app-ui-1-xxxxx            2/2     Running     0          22h
+boards-1-xxxxx            2/2     Running     0          22h
+boards-1-deploy           0/1     Completed   0          22h
+boards-mongodb-1-deploy   0/1     Completed   0          22h
+boards-mongodb-1-xxxxx    2/2     Running     0          22h
+```
+
+Finally, deploy a quota in each project.
+> Note: This is only for the `cronjob` scenario.
+
+```bash
+for (( i=1 ; i<=$NUM_USERS ; i++ ))
+do
   oc create -n user$i -f ./setup/quota.yaml
 done
 ```
