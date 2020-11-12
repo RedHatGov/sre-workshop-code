@@ -5,3 +5,5 @@ metadata:
 spec:
   hard:
     requests.cpu: "4.5"
+  scopes:
+  - NotTerminating
