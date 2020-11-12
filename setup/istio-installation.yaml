@@ -3,6 +3,12 @@ kind: ServiceMeshControlPlane
 metadata:
   name: workshop-install
 spec:
+  gateways:
+    ingress:
+      runtime:
+        container:
+          env:
+            ISTIO_META_HTTP10: '"1"'
   tracing:
     type: None
   telemetry:

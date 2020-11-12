@@ -102,3 +102,13 @@ done
 ```
 
 *Note*: The `app-ui` image in Quay was built using [this fork](https://github.com/theckang/service-mesh-workshop-code).  The `boards` image in Quay was built using the [upstream repo](https://github.com/RedHatGov/service-mesh-workshop-code).
+
+## Troubleshooting
+
+1. Envoy does not accept HTTP/1.0 connections by default.  Make sure `siege` can talk to the ingress gateway.
+
+```bash
+GATEWAY_URL=$(oc get route istio-ingressgateway -n %username%-istio --template='http://{{.spec.host}}')
+curl -I --http1.0 $GATEWAY_URL/stress
+siege -p $GATEWAY_URL/stress
+```
