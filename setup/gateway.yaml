@@ -12,16 +12,6 @@ spec:
       number: 80
       name: http
       protocol: HTTP
-  - hosts:
-    - '*'
-    port:
-      number: 443
-      name: https
-      protocol: HTTPS
-    tls:
-      mode: SIMPLE
-      serverCertificate: /etc/certs/cert-chain.pem
-      privateKey: /etc/certs/key.pem
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
