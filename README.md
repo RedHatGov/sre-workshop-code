@@ -105,10 +105,10 @@ done
 
 ## Troubleshooting
 
-1. Envoy does not accept HTTP/1.0 connections by default.  Make sure `siege` can talk to the ingress gateway.
+1. Envoy does not accept HTTP/1.0 connections by default.  Make sure `ab` can talk to the ingress gateway.
 
 ```bash
 GATEWAY_URL=$(oc get route istio-ingressgateway -n %username%-istio --template='http://{{.spec.host}}')
 curl -I --http1.0 $GATEWAY_URL/stress
-siege -p $GATEWAY_URL/stress
+ab -n 1 $GATEWAY_URL/stress
 ```
